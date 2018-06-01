@@ -20,7 +20,7 @@ export function itemsIsPending(state = false, action) {
   }
 }
 
-export function items(state = [], action) {
+export function items(state = {}, action) {
   switch (action.type) {
     case types.GET_WEATHER_SUCCESS:
       return action.items;

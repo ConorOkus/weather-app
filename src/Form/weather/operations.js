@@ -1,18 +1,8 @@
-import actions from './actions';
-
-export function errorAfterFiveSeconds () {
-  // We return a function instead of an action object
-  return (dispatch) => {
-    setTimeout(() => {
-      // This function is able to dispatch other action creators
-      dispatch(actions.itemsHasErrored(true));
-    }, 5000);
-  };
-}
+import { itemsHasErrored, itemsIsPending, itemsFetchDataSuccess } from './actions';
 
 export function itemsFetchData(url){
   return (dispatch) => {
-    dispatch(actions.itemsIsPending(true));
+    dispatch(itemsIsPending(true));
 
     fetch(url)
       .then((response) => {
@@ -20,12 +10,12 @@ export function itemsFetchData(url){
           throw Error(response.statusText);
         }
 
-        dispatch(actions.itemsIsPending(false));
+        dispatch(itemsIsPending(false));
 
         return response;
       })
       .then((response) => response.json())
-      .then((items) => dispatch(actions.itemsFetchDataSuccess(items)))
-      .catch(() => dispatch(actions.itemsHasErrored(true)));
+      .then((items) => dispatch(itemsFetchDataSuccess(items)))
+      .catch(() => dispatch(itemsHasErrored(true)));
   };
 }
