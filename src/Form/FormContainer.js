@@ -5,7 +5,7 @@ import { itemsFetchData } from "./weather/operations";
 
 import './formContainer.css';
 
-class FormContainer extends React.Component {
+export class FormContainer extends React.Component {
   submit = values => {
     const { location } = values;
     this.props.fetchData(`http://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=22a053e2de5c3c1d4a609a446bebe537`);
